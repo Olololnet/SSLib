@@ -14,5 +14,7 @@ Restore removed file: `git checkout path/to/file`
 
 Restore local main: `git reset --hard origin/main`
 
+Reset changes in a file: `git checkout HEAD file_name`
+
 ### Rare cases:
 Token usage: `git clone https://token@github...`
