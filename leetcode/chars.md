@@ -2,5 +2,5 @@
 
 ```
 char x = '1';
-isdiigit(x);
+isdigit(x);
 ```
