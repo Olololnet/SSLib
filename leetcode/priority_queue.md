@@ -16,4 +16,4 @@ Custom comparator, that makes pq min for pair<int, int> where someval bounded wi
           return a.first > b.first;
       })> pq;
 ```
-Nuances: comparator can't be lambda directly, as constructor expects comparator as type.
+Nuances: comparator can't be lambda directly, as the pq constructor expects comparator as a type.
