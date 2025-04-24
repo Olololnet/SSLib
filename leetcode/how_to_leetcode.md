@@ -69,7 +69,8 @@
 Приёмы в коде. Например, есть массив интов, как один из подшагов решения, нужно понять сколько там уникальных элементов. Для плюсов мы могли бы выбрать map - и затем посчитать сколько ключей, потеряв время на то, что нам не нужна здесь мапа. Можно выбрать set, но также потерять время на том, что set упорядочивает элементы, что нам не нужно для данного этапа задачи и работать будет за NlogN. Можно выбрать unordered_set - универсальный и быстрый вариант. Собственно, предыдущие примеры могут мешать тем, кто ещё не усвоил структуры данных или кто пока ещё путается в том, где что удачно применяемо. Улучшение базы по структурам данных - есть раздел теории на литкоде.
 
 Допустим, выбрали unordered_set:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         int uniqueElementsCount = 0;
         unordered_set<int> uniqueElements;
         for (int i = 0; i < nums.size(); ++i) {
@@ -77,8 +78,10 @@
         }
         uniqueElementsCount = uniqueElements.size();
     }
+```
 Собственно, код выше не сложный, но есть цикл и в целом несколько этапов минирешения. Как могут помочь приёмы? Используем for auto и получаем:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         int uniqueElementsCount = 0;
         unordered_set<int> uniqueElements;
         for (auto x : nums) {
@@ -86,30 +89,39 @@
         }
         uniqueElementsCount = uniqueElements.size();
     }
+```
 Цикл проще? Очевидно, чем проще - тем быстрее можно написать и меньше шансов ошибиться. У нас тут есть фигурные скобки, что можно пропустить:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         int uniqueElementsCount = 0;
         unordered_set<int> uniqueElements;
         for (auto x : nums)
             uniqueElements.insert(x);
         uniqueElementsCount = uniqueElements.size();
     }
+```
 А также переменную можно сразу объявить и присвоить у ответа:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         unordered_set<int> uniqueElements;
         for (auto x : nums)
             uniqueElements.insert(x);
         const int uniqueElementsCount = uniqueElements.size();
     }
+```
 Конструктор unordered_set позволяет сразу использовать вектор без цикла заполнения:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         unordered_set<int> uniqueElements(nums.begin(), nums.end());
         const int uniqueElementsCount = uniqueElements.size();
     }
+```
 Нужен ли нам живая переменная uniqueElements? Нет:
-    void getSomeValue(vector<int> nums) {
+```
+    int getSomeValue(vector<int> nums) {
         const int uniqueElementsCount = uniqueElements(nums.begin(), nums.end()).size();
     }
+```
 Очевидно, что одна строка в данном случае:
 * минимум шансов ошибиться
 * не потащит с собой дальше живые переменные, которые отработали свою задачу и небольше не нужны
