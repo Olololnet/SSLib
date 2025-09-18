@@ -17,3 +17,5 @@ Custom comparator, that makes pq min for pair<int, int> where someval bounded wi
       })> pq;
 ```
 Nuances: comparator can't be lambda directly, as the pq constructor expects comparator as a type.
+
+Task pattern: priority_queue, but priority could be changed. Core idea for this: pq stores elements and additional map tracks <unique_element_pointer, realPriority>. Thus, on priority editing -> add element to queue as the new one, edit priotity with tracking map. On using pq: if top element doesnt't match with tracking map (or no element in map -> element actually is used or deleted), this means it's false/outdated element -> just drop it.
